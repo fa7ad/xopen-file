@@ -11,7 +11,7 @@ class MainWidget(QWidget):
     """Main window class."""
 
     def __init__(self):
-        """Run the Qwidget initializer and initialize the UI."""
+        """Run the Qwidget initializer; initialize the UI."""
         super().__init__()
         self.init_ui()
         self.keyPressEvent = self.handle_keypress  # cuz flake8 -_-
@@ -57,7 +57,13 @@ class MainWidget(QWidget):
             run(['xdg-open', self.text_entry.text().strip()])
 
 
+def main():
+    """App runner."""
+    app = QApplication(["xopen-file"] + sys.argv[1:])
+    window = MainWidget()
+    print("started {}".format(window.windowTitle()))
+    sys.exit(app.exec_())
+
+
 if __name__ == '__main__':
-    APP = QApplication(["xopen-file"] + sys.argv[1:])
-    WIDGET = MainWidget()
-    sys.exit(APP.exec_())
+    main()
