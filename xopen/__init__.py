@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+
 """Launch xdg-open with the provided file locations."""
 import sys
 from subprocess import run
@@ -43,16 +46,16 @@ class MainWidget(QWidget):
 
     def center(self):
         """Move window to the center of the screen."""
-        qr = self.frameGeometry()
-        cp = QDesktopWidget().availableGeometry().center()
-        qr.moveCenter(cp)
-        self.move(qr.topLeft())
+        fake_el = self.frameGeometry()
+        center_px = QDesktopWidget().availableGeometry().center()
+        fake_el.moveCenter(center_px)
+        self.move(fake_el.topLeft())
 
-    def handle_keypress(self, e):
+    def handle_keypress(self, event):
         """Quit application on Escape key."""
-        if e.key() == Qt.Key_Escape:
+        if event.key() == Qt.Key_Escape:
             self.close()
-        elif e.key() == Qt.Key_Return:
+        elif event.key() == Qt.Key_Return:
             self.close()
             run(['xdg-open', self.text_entry.text().strip()])
 
