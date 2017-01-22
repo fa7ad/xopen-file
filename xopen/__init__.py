@@ -1,31 +1,63 @@
-""" Launch xdg-open with the provided file locations
-"""
-from tkinter import Tk
-from tkinter.ttk import Entry
+"""Launch xdg-open with the provided file locations."""
+import sys
 from subprocess import run
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QWidget,
+                             QGridLayout, QLabel, QLineEdit)
 
 
-def main():
-    """Prepare the GUI
-    And launch it
-    """
-    window = Tk(className='xopen-file')
-    window.title("xopen-file")
-    window.configure(background='white')
-    window.minsize(100, 10)
-    window.resizable(False, False)
+class MainWidget(QWidget):
+    """Main window class."""
 
-    text_box = Entry(window, width=30)
-    text_box.bind('<Return>', lambda e: handle_entry(window, text_box))
-    text_box.bind('<KP_Enter>', lambda e: handle_entry(window, text_box))
-    text_box.pack()
+    def __init__(self):
+        """Run the Qwidget initializer and initialize the UI."""
+        super().__init__()
+        self.init_ui()
+        self.keyPressEvent = self.handle_keypress  # cuz flake8 -_-
 
-    window.mainloop()
+    def init_ui(self):
+        """Initialize the UI."""
+        # Postion the window.
+        self.setFixedSize(300, 100)
+        self.center()
+
+        # Create the widgets
+        label = QLabel('Location of the file/folder:')
+        self.text_entry = QLineEdit()
+
+        # Create the grid
+        grid = QGridLayout()
+        grid.setSpacing(10)
+
+        grid.addWidget(label, 0, 0)
+        grid.addWidget(self.text_entry, 1, 0)
+
+        # Title and Icon.
+        self.setWindowTitle('xopen-file')
+        self.setWindowIcon(QIcon('icon.svg'))
+
+        # Show all the Widgets
+        self.setLayout(grid)
+        self.show()
+
+    def center(self):
+        """Move window to the center of the screen."""
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+    def handle_keypress(self, e):
+        """Quit application on Escape key."""
+        if e.key() == Qt.Key_Escape:
+            self.close()
+        elif e.key() == Qt.Key_Return:
+            self.close()
+            run(['xdg-open', self.text_entry.text().strip()])
 
 
-def handle_entry(root, box):
-    """ destroy the window and launch xdg-open
-    """
-    file_location = box.get().strip()
-    root.destroy()
-    run(['xdg-open', file_location])
+if __name__ == '__main__':
+    APP = QApplication(["xopen-file"] + sys.argv[1:])
+    WIDGET = MainWidget()
+    sys.exit(APP.exec_())

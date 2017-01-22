@@ -4,7 +4,13 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
+MainWidget	xopen/__init__.py	/^class MainWidget(QWidget):$/;"	kind:class	line:12
+QApplication	xopen/__init__.py	/^from PyQt5.QtWidgets import QApplication, QWidget$/;"	kind:namespace	line:9
+QIcon	xopen/__init__.py	/^from PyQt5.QtGui import QIcon$/;"	kind:namespace	line:8
+QWidget	xopen/__init__.py	/^from PyQt5.QtWidgets import QApplication, QWidget$/;"	kind:namespace	line:9
+__init__	xopen/__init__.py	/^    def __init__(self):$/;"	kind:member	line:14
 __init__.py	xopen/__init__.py	1;"	kind:file	line:1
+app	xopen/__init__.py	/^    app = QApplication(["xopen-file"] + sys.argv[1:])$/;"	kind:variable	line:27
 author	setup.py	/^    author='Fahad Hossain',$/;"	kind:variable	line:31
 author_email	setup.py	/^    author_email='8bit.demoncoder@gmail.com',$/;"	kind:variable	line:32
 classifiers	setup.py	/^    classifiers=[$/;"	kind:variable	line:38
@@ -14,18 +20,21 @@ entry_points	setup.py	/^    entry_points={$/;"	kind:variable	line:95
 extras_require	setup.py	/^    extras_require={},$/;"	kind:variable	line:78
 find_packages	setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:5
 here	setup.py	/^here = path.abspath(path.dirname(__file__))$/;"	kind:variable	line:10
+init_ui	xopen/__init__.py	/^    def init_ui(self):$/;"	kind:member	line:18
 install_requires	setup.py	/^    install_requires=[],$/;"	kind:variable	line:72
 keywords	setup.py	/^    keywords='xdg-open file gui',$/;"	kind:variable	line:58
 license	setup.py	/^    license='MIT',$/;"	kind:variable	line:35
 long_description	setup.py	/^    long_description = f.read()$/;"	kind:variable	line:14
 long_description	setup.py	/^    long_description=long_description,$/;"	kind:variable	line:25
-main	xopen/__init__.py	/^def main():$/;"	kind:function	line:2
 name	setup.py	/^    name='xopen-file',$/;"	kind:variable	line:17
 open	setup.py	/^from codecs import open$/;"	kind:namespace	line:7
 package_data	setup.py	/^    package_data={$/;"	kind:variable	line:83
 packages	setup.py	/^    packages=find_packages(exclude=['contrib', 'docs', 'tests']),$/;"	kind:variable	line:62
 path	setup.py	/^from os import path$/;"	kind:namespace	line:8
+run	xopen/__init__.py	/^from subprocess import run$/;"	kind:namespace	line:6
 setup	setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:5
 setup.py	setup.py	1;"	kind:file	line:1
+sys	xopen/__init__.py	/^import sys$/;"	kind:namespace	line:5
 url	setup.py	/^    url='https:\/\/github.com\/fa7ad\/xopen-file',$/;"	kind:variable	line:28
 version	setup.py	/^    version='1.0.0',$/;"	kind:variable	line:22
+widget	xopen/__init__.py	/^    widget = MainWidget()$/;"	kind:variable	line:28
