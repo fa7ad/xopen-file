@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """Launch xdg-open with the provided file locations."""
+import os
 import sys
 from subprocess import run
 from PyQt5.QtCore import Qt
@@ -16,6 +17,7 @@ class MainWidget(QWidget):
     def __init__(self):
         """Run the Qwidget initializer; initialize the UI."""
         super().__init__()
+        self.modulepath = os.path.dirname(os.path.realpath(__file__))
         self.init_ui()
         self.keyPressEvent = self.handle_keypress  # cuz flake8 -_-
 
@@ -38,7 +40,8 @@ class MainWidget(QWidget):
 
         # Title and Icon.
         self.setWindowTitle('xopen-file')
-        self.setWindowIcon(QIcon('icon.svg'))
+        self.setWindowIcon(QIcon.fromTheme('search',
+                           QIcon(self.modulepath + '/icon.svg')))
 
         # Show all the Widgets
         self.setLayout(grid)
