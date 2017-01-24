@@ -55,7 +55,7 @@ class MainWidget(QWidget):
         """Quit application on Escape key."""
         if event.key() == Qt.Key_Escape:
             self.close()
-        elif event.key() == Qt.Key_Return:
+        elif event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
             self.close()
             run(['xdg-open', self.text_entry.text().strip()])
 
