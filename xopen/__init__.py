@@ -8,7 +8,7 @@ from subprocess import run
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QWidget,
-                             QGridLayout, QLabel, QLineEdit)
+                             QGridLayout, QLabel, QLineEdit, QPushButton)
 
 
 class MainWidget(QWidget):
@@ -28,15 +28,20 @@ class MainWidget(QWidget):
         self.center()
 
         # Create the widgets
-        label = QLabel('Location of the file/folder:')
+        self.label = QLabel('Location of the file/folder:')
+        self.button = QPushButton("Go!")
         self.text_entry = QLineEdit()
+
+        # handle button click
+        self.button.clicked.connect(self.handle_button)
 
         # Create the grid
         grid = QGridLayout()
         grid.setSpacing(10)
 
-        grid.addWidget(label, 0, 0)
+        grid.addWidget(self.label, 0, 0)
         grid.addWidget(self.text_entry, 1, 0)
+        grid.addWidget(self.button, 1, 1)
 
         # Title and Icon.
         self.setWindowTitle('xopen-file')
@@ -59,6 +64,12 @@ class MainWidget(QWidget):
         if event.key() == Qt.Key_Escape:
             self.close()
         elif event.key() == Qt.Key_Return or event.key() == Qt.Key_Enter:
+            self.close()
+            run(['xdg-open', self.text_entry.text().strip()])
+
+    def handle_button(self):
+        """Open file on click"""
+        if len(self.text_entry.text().strip()) > 0:
             self.close()
             run(['xdg-open', self.text_entry.text().strip()])
 
